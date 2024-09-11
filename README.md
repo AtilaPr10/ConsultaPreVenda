@@ -13,4 +13,5 @@
   - Java (Linguagem de Programação)
   - Java Server Faces/ Myfaces (Framework Component Based)
   - Primefaces (Biblioteca de Interface Grafica)
-  - Gson (Biblioteca para conversões em Json <-> Java)
+  - IText (Para geração de PDF)
+  - JDBC para conexao com banco firebird
