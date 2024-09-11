@@ -1,12 +1,10 @@
 # Consulta-Cep-JSF
-### Aplicação JSF consumindo a api da viacep para exibir dados de um endereço
-![JavaViaCep](https://github.com/AtilaPr10/Consulta-Cep-JSF/assets/7785440/91a46811-be79-4291-9e30-63583075d5ad)
+### Aplicação JSF conectando em uma base de dados firebird lendo e exibindo registros
 
 
-![TelaApp](https://github.com/AtilaPr10/Consulta-Cep-JSF/assets/7785440/3bf4c130-0e38-448f-ba60-da4c9546d736)
+![image](https://github.com/user-attachments/assets/7f49f42e-c2b3-45f5-8e45-7ff6430891df)
 
 
-![Via Cep](https://github.com/AtilaPr10/Consulta-Cep-JSF/assets/7785440/57736611-5616-47e2-a155-ffc0e43abd6b)
 
 
 ### Tecnologias :
