@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	<h:head>
+		<title>JSF - Myfaces Consulta Cep </title>
+	</h:head>
+	  
+	  <h:form>
+	  
+	    <p:messages>
+           <p:autoUpdate/>
+        </p:messages>
+    	<h:body>
+		  
+		  
+		  <h5>CEP</h5>
+		  <p:inputMask name ="cep" id="txtcep" value="#{cepBean.cep}" required="true" mask="99.999-999"   
+		    validateMask="true" requiredMessage="Digite o numero do cep" maxlength="10" converter="convertCep"/>
+		  <p:message for="txtcep"/>
+		  
+		  <p:commandButton value="Buscar"  action="#{cepBean.retornaEndereco()}" update="tb-cep">
+		  </p:commandButton>
+		  <div class="card">
+		 <p:dataTable id="tb-cep" var="endereco" value="#{cepBean.enderecos}" emptyMessage="Endereço não encontrado" >
+		
+		   <p:column headerText="Cep">
+                <h:outputText value="#{endereco.cep}" />
+            </p:column>
+
+            <p:column headerText="Logradouro">
+                <h:outputText value="#{endereco.logradouro}" />
+            </p:column>
+            
+            <p:column headerText="Bairro">
+                <h:outputText value="#{endereco.bairro}" />
+            </p:column>
+            
+            <p:column headerText="Localidade">
+                <h:outputText value="#{endereco.localidade}" />
+            </p:column>
+            
+            <p:column headerText="UF">
+                <h:outputText value="#{endereco.uf}" />
+            </p:column>
+		
+		    <p:column headerText="Complemento">
+                <h:outputText value="#{endereco.complemento}" />
+            </p:column>
+            
+            <p:column headerText="Ibge">
+                <h:outputText value="#{endereco.ibge}" />
+            </p:column>
+		
+		</p:dataTable>
+		</div>
+		  
+		  
+	   </h:body>
+	  </h:form>  
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<h:head>
+		<title>PreVenda</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">	
+	</link>
+	<script type="text/javascript">
+        function redireciona(param){
+                  location.href=param;
+            	}   
+    </script>         
+	</h:head>
+	<h:body>  
+	<h:form id="frm">
+	  
+	    <p:messages>
+           <p:autoUpdate/>
+        </p:messages>
+    	
+		  
+		    <p></p>
+            <p></p>
+
+            <p:outputLabel  for="@next" value="Data Inicial" />
+            <p:spacer width="50" height="5"/>
+            <p:inputMask id="date1"  value="#{preVenda.data1}" mask="99.99.9999" required="true" requiredMessage=" Digite uma data" /> 
+            <p:spacer width="50" height="5"/>
+            <p:outputLabel  value="Data Final" />
+            <p:spacer width="50" height="5"/>
+            <p:inputMask id="date2"  value="#{preVenda.data2}"  mask="99.99.9999" required="true" requiredMessage=" Digite uma data" />
+      
+		    <p:spacer width="100" height="05"/>
+		    <p:commandButton value="Buscar"    action="#{preVenda.buscaPrevendas()}"         update="frm_tabela">
+		    </p:commandButton>
+		   
+		    <p:spacer width="50" height="5"/>
+		    <p:commandButton value="Carregar" ajax="true"  
+		       actionListener="#{preVenda.carregarPreVendas}" oncomplete="PF('dlg2').show()"  update="frm_tabela:dlg2" process="@this" >
+		    </p:commandButton>
+		   
+		  
+               
+               
+           
+             
+            
+		    
+		     <p></p>
+	         <p></p>
+	         
+		     <span class="ui-float-label">
+                <p:inputText value ="#{preVenda.nome_entregador}" required= "true" requiredMessage="Digite o nome do entregador">
+                </p:inputText>
+                <p:outputLabel for="@previous" value="Nome"/>
+             </span>
+		  
+    </h:form>
+    <p></p>
+    <p></p>		
+	<p:separator/>	  
+	<h:form id= "frm_tabela"> 
+		  
+		   
+		 
+		  
+		 <div class="card">
+		
+		 <p:dataTable id="tb-prevenda" var="prevenda" value="#{preVenda.prevendas}"  selectionRowMode="none"
+		   selection="#{preVenda.prevendas_selecionadas}" rowKey="#{prevenda.codigo_prevenda}"
+		   paginator="true" rows="5"
+		   cellNavigation="true" >
+		   
+		   <p:ajax event="rowSelectCheckbox" update="@form" />
+           <p:ajax event="rowUnselectCheckbox" update="@form" />
+           <p:ajax event="rowSelect" update="@form" />
+           <p:ajax event="rowUnselect" update="@form" />
+           <p:ajax event="toggleSelect" update="@form" />
+		   
+		   <p:column selectionBox="true" style="width:16px;text-align:center" selectionMode="multiple"/>
+		  
+		 
+		   <p:column headerText="Pre Venda">
+                <h:outputText value="#{prevenda.codigo_prevenda}" />
+            </p:column>
+
+            <p:column headerText="Cliente">
+                <h:outputText value="#{prevenda.nome_cliente}" />
+            </p:column>
+            
+            <p:column headerText="Valor">
+                <h:outputText value="#{prevenda.valor_prevenda}" />
+            </p:column>
+            
+           
+		
+	     </p:dataTable>
+	    
+	     
+	      
+          
+		 </div>
+		 <p:dialog id="dlg2" header="Carregamento" widgetVar="dlg2" minHeight="500" width="550" showEffect="fade" modal="true"
+		           closeOnEscape="true">
+		           
+           <h:form id="frm_dlg" method="GET" action="pdf">
+               
+            <input type="button" onClick="redireciona('pdf');" value="Imprimir"  class="btn btn-primary">
+               
+            </input>
+           
+          
+            <p></p>
+            <p></p>   
+            
+            <p:scrollPanel style="width:450px;height:250px">
+                   
+               <p></p>
+               <p></p>
+               <p></p>
+               <p></p>
+             
+              
+            
+              
+                
+              <p:dataTable id="tbl_selecionados" var = "selecionados"
+                           value= "#{preVenda.prevendas_selecionadas}"
+                           styleClass="mr-2 ui-button-outlined">
+                   
+                    
+                   
+                   
+		             <p:column headerText="Pre Venda">
+                           <h:outputText value="#{selecionados.codigo_prevenda}" style="font-weight:bold"  />
+                     </p:column>
+
+                     <p:column headerText="Cliente">
+                          <h:outputText value="#{selecionados.nome_cliente}" />
+                     </p:column>
+            
+                    <p:column headerText="Valor">
+                         <h:outputText value="#{selecionados.valor_prevenda}" />
+                    </p:column>
+            
+                   <f:facet name="footer">
+                           <span class="font-bold">Valor Total: #{preVenda.str_valor_total}</span>
+                           <p></p>
+                           <p></p>
+                   </f:facet>
+               </p:dataTable>
+              </p:scrollPanel>
+            </h:form>
+            <!--  
+            <p:outputLabel id="vlr" value= "#{preVenda.str_valor_total}" /> 
+            
+            -->
+           
+         </p:dialog>
+         
+        
+	     
+   </h:form>   
+	
+   <h:outputText value="OBS: Só serão listadas prevendas abertas e com o tipo de atendimento telefônico" style='color:red'></h:outputText>
+   </h:body>
+    
+</html>
