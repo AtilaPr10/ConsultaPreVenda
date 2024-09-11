@@ -1,4 +1,4 @@
-# Consulta-Cep-JSF
+# ConsultaPreVenda-JSF
 ### Aplicação JSF conectando em uma base de dados firebird lendo e exibindo registros
 
 
